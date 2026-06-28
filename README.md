@@ -9,9 +9,11 @@ The base game of Dwarf Fortress restricts the starting embark screen to a small 
 
 **Ultimate Embark Animals** compiles the vanilla creature raw files and appends the `[COMMON_DOMESTIC]`, `[TRAINABLE]`, and `[PET]` tags to **399 vanilla native creatures**, allowing you to start your fortress with a giant panda, a woolly mammoth, a cave crocodile, or a troop of macaques right from day one!
 
+Originally, I built this mod as an internal tool to help reverse-engineer and study Dwarf Fortress engine combat mechanics. I have since decided to release this component publicly for everyone to enjoy!
+
 ---
 
-## 🔗 Key Links & Interactive Pokedex
+## 🔗 Animal Companion Catalog & Source Links
 * 🎮 **Steam Workshop Page:** [Ultimate Embark Animals on Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=3751705029)
 * 📖 **DF Pokedex Companion Bestiary:** [Dwarf Fortress Creature Catalog Website](https://telendrith.github.io/dwarf-fortress-creature-catalog/)
 
@@ -75,6 +77,9 @@ To eliminate list clutter on the embark screen, creatures are organized into thr
 4. Launch the game, click **Mods** on the world generation setup screen, move **Ultimate Embark Animals** to the active mod list, and generate a new world!
 
 *Note: Like all Dwarf Fortress raw mods, this requires generating a new world to take effect.*
+
+> [!IMPORTANT]
+> **Summer Holiday Note:** Starting in July I'll be on summer holiday for a month, so updates etc. will be rare as we'll be in the wilderness! !Ciao ~Telendrith
 
 ---
 
