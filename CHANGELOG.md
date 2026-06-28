@@ -2,6 +2,12 @@
 
 All notable changes to the "Ultimate Embark Animals" mod will be documented in this file.
 
+## [0.6] - 2026-06-28
+### Added / Changed
+- **Autistike's Migrant Pet Fix:** Swapped `[PET]` for `[PET_EXOTIC]` across modded creatures and simplified the dwarven civilization entity roster to use general permission tags (`[USE_GOOD_ANIMALS]`, `[USE_EVIL_ANIMALS]`, `[USE_CAVE_ANIMALS]`). I think the reason migrants were clogging forts with giant tortoises and cobras was because the total domestic pet pool grew to 409, so migrants had a 97.5% chance to roll an exotic pet. Flagging them as `[PET_EXOTIC]` lets you buy them at embark but prevents migrants from spawning with them.
+- **Respect Worldgen Extinction settings:** Removed the static `[COMMON_DOMESTIC]` override from prehistoric creatures. They will now only appear at embark if "Real world extinct creatures" is set to "Domesticated", and will remain wild or extinct otherwise, respecting worldgen.
+- **Vanilla Domestics Preservation:** Excluded vanilla domestic creatures (such as Dogs, Cats, Pigs, Cows) from being overridden, ensuring cats and dogs remain normal pets for migrants and livestock stays livestock.
+
 ## [0.5] - 2026-06-27
 ### Added
 - **Pokedex Sentience Fix:** Fixed a database compiler bug that miscalculated intelligence flags for animal people. They are now correctly parsed and listed as sentient.

@@ -69,19 +69,6 @@ const BODY_PLAN_LABELS = {
   "NAILS": "Protective Nails / Claws"
 };
 
-const PLAN_DEFAULT_TISSUES = {
-  "STANDARD_MATERIALS": ["skin", "fat", "muscle", "bone", "blood"],
-  "STANDARD_TISSUES": ["skin", "fat", "muscle", "cartilage"],
-  "VERTEBRATE_TISSUE_LAYERS": ["skin", "fat", "muscle", "bone"],
-  "EXOSKELETON_TISSUE_LAYERS": ["chitin", "muscle"],
-  "HAIR": ["hair"],
-  "SCALES": ["scales"],
-  "FEATHERS": ["feathers"],
-  "CHITIN": ["chitin"],
-  "TEETH": ["teeth", "bone"],
-  "GENERIC_TEETH_WITH_LARGE_EYE_TEETH": ["canine teeth", "teeth", "bone"]
-};
-
 // Convert volume in cm3 to weights
 function getAdultSize(bodySizes) {
   if (!bodySizes || bodySizes.length === 0) return 0;
@@ -428,56 +415,31 @@ function openCreatureDetailDrawer(c) {
   // Body Detail Plans
   let bodyPlansHtml = '<div style="color: var(--text-muted); font-style: italic;">No structural body plans recorded.</div>';
   if (c.body_detail_plans && c.body_detail_plans.length > 0) {
-    // Filter out positioning and proportion plans to keep it focused on materials/tissues
-    const tissuePlans = c.body_detail_plans.filter(plan => 
-      !plan.name.endsWith('_POSITIONS') && 
-      !plan.name.endsWith('_RELSIZES')
-    );
-    
-    if (tissuePlans.length > 0) {
-      bodyPlansHtml = '<div class="drawer-body-plans">';
-      tissuePlans.forEach(plan => {
-        let argsHtml = '';
-        const defaultTissues = PLAN_DEFAULT_TISSUES[plan.name];
-        if (plan.arguments.length > 0) {
-          argsHtml = '<div class="body-plan-args-flow">';
-          plan.arguments.forEach((arg, i) => {
-            const cleanArg = BODY_PLAN_LABELS[arg] || arg.toLowerCase();
-            const hasNext = i < plan.arguments.length - 1;
-            argsHtml += `
-              <div class="body-plan-step">
-                <span class="body-plan-arg-bubble">${cleanArg}</span>
-                ${hasNext ? '<span class="body-plan-arrow">➔</span>' : ''}
-              </div>
-            `;
-          });
-          argsHtml += '</div>';
-        } else if (defaultTissues && defaultTissues.length > 0) {
-          argsHtml = '<div class="body-plan-args-flow">';
-          defaultTissues.forEach((tissue, i) => {
-            const cleanTissue = BODY_PLAN_LABELS[tissue.toUpperCase()] || tissue.toLowerCase();
-            const hasNext = i < defaultTissues.length - 1;
-            argsHtml += `
-              <div class="body-plan-step">
-                <span class="body-plan-arg-bubble default-tissue-bubble">${cleanTissue}</span>
-                ${hasNext ? '<span class="body-plan-arrow">➔</span>' : ''}
-              </div>
-            `;
-          });
-          argsHtml += '</div>';
-        } else {
-          argsHtml = '<span class="body-plan-arg-bubble empty-plan-bubble" style="font-style:italic; opacity: 0.6;">Standard template structure</span>';
-        }
-          
-        bodyPlansHtml += `
-          <div class="body-plan-card">
-            <div class="body-plan-name">❖ ${getAnatomyLabel(plan.name)}</div>
-            ${argsHtml}
-          </div>
-        `;
-      });
-      bodyPlansHtml += '</div>';
-    }
+    bodyPlansHtml = '<div class="drawer-body-plans">';
+    c.body_detail_plans.forEach(plan => {
+      let argsHtml = '';
+      if (plan.arguments.length > 0) {
+        argsHtml = '<div class="body-plan-args-flow">';
+        plan.arguments.forEach((arg, i) => {
+          const cleanArg = BODY_PLAN_LABELS[arg] || arg.toLowerCase();
+          argsHtml += `<span class="body-plan-arg-bubble">${cleanArg}</span>`;
+          if (i < plan.arguments.length - 1) {
+            argsHtml += '<span class="body-plan-arrow">➔</span>';
+          }
+        });
+        argsHtml += '</div>';
+      } else {
+        argsHtml = '<span class="body-plan-arg-bubble" style="font-style:italic; opacity: 0.6;">Standard composition template</span>';
+      }
+        
+      bodyPlansHtml += `
+        <div class="body-plan-card">
+          <div class="body-plan-name">❖ ${getAnatomyLabel(plan.name)}</div>
+          ${argsHtml}
+        </div>
+      `;
+    });
+    bodyPlansHtml += '</div>';
   }
 
   // 1. Spawning Frequency Text
@@ -671,21 +633,12 @@ function openCreatureDetailDrawer(c) {
   // Embark Status Box
   let embarkAlertHtml = '';
   if (c.included_in_mod) {
-    if (c.is_domestic) {
-      embarkAlertHtml = `
-        <div class="embark-status-alert status-allowed" style="background: rgba(212, 175, 55, 0.05); border-color: rgba(212, 175, 55, 0.25); color: #ecc94b;">
-          <strong>Vanilla Embark Option (Base Game Domestic)</strong><br>
-          This creature is already domesticated in the base vanilla game. It is fully available to purchase during your fortress embark planning phase by default.
-        </div>
-      `;
-    } else {
-      embarkAlertHtml = `
-        <div class="embark-status-alert status-allowed">
-          <strong>Mod Embark Authorization: Approved</strong><br>
-          Under this expansion mod, this creature has been domesticated and can now be purchased during your fortress embark planning phase (not available in the vanilla base game).
-        </div>
-      `;
-    }
+    embarkAlertHtml = `
+      <div class="embark-status-alert status-allowed">
+        <strong>Mod Embark Authorization: Approved</strong><br>
+        Under this expansion mod, this creature is domesticated and can be purchased during your fortress embark planning phase (not available in the vanilla base game).
+      </div>
+    `;
   } else {
     let plainReason = 'This creature is incompatible with fortress embark husbandry under this mod.';
     const r = c.exclusion_reason || '';
@@ -703,48 +656,6 @@ function openCreatureDetailDrawer(c) {
     embarkAlertHtml = `
       <div class="embark-status-alert status-denied">
         ${plainReason}
-      </div>
-    `;
-  }
-
-  // Mod Alterations Panel
-  let modAlterationsHtml = '';
-  if (c.included_in_mod && !c.is_domestic) {
-    let alterNotes = [];
-    const ampIds = new Set([
-      "CRETACEOUS_ARCHELON",
-      "DEVONIAN_HIBBERTOPTERUS_SCOULERI",
-      "DEVONIAN_HIBBERTOPTERUS_PEACHI",
-      "SILURIAN_JAEKELOPTERUS",
-      "TRIASSIC_PSEPHODERMA"
-    ]);
-    const pricedIds = new Set(["IMP_FIRE", "GRIMELING", "CRAB", "HORSESHOE_CRAB", "YETI", "SASQUATCH"]);
-
-    if (c.creature_id === 'CAVE_DRAGON') {
-      alterNotes.push(`• <strong>Purchase Cost Reduced:</strong> Base price reduced from 10,000 to <strong>1,000 ★</strong> to make it accessible during embark.`);
-    }
-    if (c.creature_id === 'YETI' || c.creature_id === 'SASQUATCH') {
-      alterNotes.push(`• <strong>Real Wild Animal:</strong> Removed the <code>[FANCIFUL]</code> tag, allowing it to spawn normally in glacial, tundra, and mountain biomes.`);
-    }
-    if (ampIds.has(c.creature_id)) {
-      alterNotes.push(`• <strong>Land Survival (Amphibious):</strong> Added the <code>[AMPHIBIOUS]</code> tag in the mod raws so it survives dry land spawns upon embark (normally strictly aquatic).`);
-    } else if (c.is_aquatic && !c.is_amphibious) {
-      alterNotes.push(`• <strong style="color: #f66868;">Aquatic Suffocation Hazard:</strong> Strictly aquatic. Lacks the <code>[AMPHIBIOUS]</code> tag and <strong>will suffocate on land</strong> if embarked. Water/pool access must be constructed immediately.`);
-    }
-    if (pricedIds.has(c.creature_id)) {
-      alterNotes.push(`• <strong>Custom Pricing:</strong> Assigned a default value of <strong>${c.pet_value} ★</strong> (vanilla has no price defined).`);
-    }
-
-    // Always add embark authorization explanation
-    alterNotes.push(`• <strong>Embark Authorization:</strong> Dwarf civilization entity animal permissions appended to bypass worldgen biome mapping and exotic taming locks.`);
-
-    modAlterationsHtml = `
-      <div class="panel-section-title" style="margin-top: 1.5rem; color: #ed8936;">❖ Mod Alterations & Enhancements</div>
-      <div class="mod-alterations-box" style="font-size: 0.88rem; line-height: 1.5; color: var(--text-muted); background: rgba(237, 137, 54, 0.05); border: 1px solid rgba(237, 137, 54, 0.2); padding: 0.85rem; border-radius: 6px; margin-top: 0.5rem; font-family: var(--font-body);">
-        <div style="margin-bottom: 0.4rem; font-weight: 600; color: #f6ad55;">Mod Details (v0.3):</div>
-        <div style="display: flex; flex-direction: column; gap: 0.4rem;">
-          ${alterNotes.join('<br>')}
-        </div>
       </div>
     `;
   }
@@ -769,9 +680,6 @@ function openCreatureDetailDrawer(c) {
         <div class="drawer-taxonomy">${taxonomyType}</div>
         <span class="drawer-id">${c.creature_id}</span>
         <h2 class="drawer-name">${c.name || c.creature_id}</h2>
-        <div class="drawer-badges" style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:0.4rem; margin-bottom:0.6rem;">
-          ${getCreatureBadgesHtml(c)}
-        </div>
         <span class="drawer-source">Source File: <code>${formatSourceFile(c.source_file)}</code></span>
       </div>
     </div>
@@ -780,7 +688,6 @@ function openCreatureDetailDrawer(c) {
     ${descriptionHtml}
     ${thiefAlertHtml}
     ${embarkAlertHtml}
-    ${modAlterationsHtml}
 
     ${tacticalStripHtml}
 
@@ -788,7 +695,7 @@ function openCreatureDetailDrawer(c) {
       <!-- Panel 1: Spawning & Environment -->
       <div class="drawer-group-panel">
         <div class="panel-section-title">❖ Spawning & Environment</div>
-        <div class="card-stats" style="border: none; padding: 0; margin-top: 0.5rem;">
+        <div class="card-stats" style="border: none; padding: 0;">
           <div class="stat-row"><span class="stat-label">Spawning Status</span><span class="stat-val">${freqText}</span></div>
           <div class="stat-row"><span class="stat-label">Herd/Group Size</span><span class="stat-val">${herdText}</span></div>
           <div class="stat-row"><span class="stat-label">Regional Population</span><span class="stat-val">${popText}</span></div>
@@ -829,9 +736,9 @@ function openCreatureDetailDrawer(c) {
           <div class="drawer-rating-track" style="border-color: rgba(99, 179, 237, 0.25);">
             <div class="drawer-rating-fill" style="background: linear-gradient(90deg, #2b6cb0, #3182ce); width: ${sPercentile}%"></div>
           </div>
-          <div style="display:flex; justify-content:space-between; font-size:0.68rem; color:var(--text-muted); font-family:system-ui, sans-serif; margin-top:0.2rem; font-weight: 500;">
-            <span>Slowest Rank</span>
-            <span>Fastest Rank</span>
+          <div style="display:flex; justify-content:space-between; font-size:0.68rem; color:var(--text-muted); font-family:var(--font-tech); margin-top:0.2rem;">
+            <span>Slow (8775 delay)</span>
+            <span>Fast (100 delay)</span>
           </div>
         </div>
 
@@ -1137,85 +1044,6 @@ function getMaxAge(maxAgeStr) {
   return match ? parseInt(match[2]) : 0;
 }
 
-function getCreatureClassification(c) {
-  const size = getAdultSize(c.body_sizes);
-  if (c.is_megabeast || c.is_semimegabeast || size >= 5000000) {
-    return { class: 'nature-megabeast', label: 'Megabeast' };
-  }
-  if (c.is_sentient) {
-    return { class: 'nature-sentient', label: 'Sentient' };
-  }
-  if (c.is_nopain || c.is_nobreathe || c.is_noexert) {
-    return { class: 'nature-construct', label: 'Construct' };
-  }
-  if (c.is_aquatic || c.is_amphibious) {
-    return { class: 'nature-aquatic', label: 'Aquatic' };
-  }
-  if (c.is_flier) {
-    return { class: 'nature-flyer', label: 'Flyer' };
-  }
-  if (c.is_domestic || (c.included_in_mod && !c.is_sentient)) {
-    return { class: 'nature-domestic', label: 'Domestic' };
-  }
-  return { class: 'nature-wild', label: 'Wild' };
-}
-
-function getCreatureBadgesHtml(c) {
-  const classification = getCreatureClassification(c);
-  let badgesHtml = '';
-  
-  if (c.included_in_mod) {
-    badgesHtml += `<span class="badge badge-included">Included</span>`;
-  } else {
-    badgesHtml += `<span class="badge badge-excluded">Excluded</span>`;
-  }
-  
-  badgesHtml += `<span class="badge badge-nature-${classification.class}">❖ ${classification.label}</span>`;
-  
-  // Render type badges (excluding duplicate classifications)
-  if (classification.label !== 'Aquatic') {
-    if (c.is_aquatic && !c.is_amphibious) {
-      badgesHtml += `<span class="badge badge-type badge-aquatic">Aquatic</span>`;
-    } else if (c.is_amphibious) {
-      badgesHtml += `<span class="badge badge-type badge-amphibious">Amphibious</span>`;
-    }
-  } else if (c.is_amphibious) {
-    badgesHtml += `<span class="badge badge-type badge-amphibious">Amphibious</span>`;
-  }
-  
-  if (classification.label !== 'Flyer' && c.is_flier) {
-    badgesHtml += `<span class="badge badge-type badge-flier">Flyer</span>`;
-  }
-  
-  if (classification.label !== 'Sentient' && c.is_sentient) {
-    // Normal sapient classification will handle this, but if classified differently, show tag
-    badgesHtml += `<span class="badge badge-type badge-sentient">Sentient</span>`;
-  }
-  
-  if (c.is_prehistoric || c.creature_classes.includes('REAL_WORLD_EXTINCT')) {
-    badgesHtml += `<span class="badge badge-type badge-prehistoric">Prehistoric</span>`;
-  }
-  
-  if (c.source_file.includes('subterranean') || c.biomes.some(b => b.includes('SUBTERRANEAN'))) {
-    badgesHtml += `<span class="badge badge-type badge-cavern">Cavern</span>`;
-  }
-  
-  if (c.is_good) badgesHtml += `<span class="badge badge-type badge-good">Good</span>`;
-  if (c.is_evil) badgesHtml += `<span class="badge badge-type badge-evil">Evil</span>`;
-  if (c.is_savage) badgesHtml += `<span class="badge badge-type badge-savage">Savage</span>`;
-
-  // Traits
-  if (c.is_webber) badgesHtml += `<span class="badge badge-trait">❖ Web</span>`;
-  if (c.is_nopain) badgesHtml += `<span class="badge badge-trait">❖ Painless</span>`;
-  if (c.is_noexert) badgesHtml += `<span class="badge badge-trait">❖ Tireless</span>`;
-  if (c.is_nobreathe) badgesHtml += `<span class="badge badge-trait">❖ Airless</span>`;
-  if (c.is_trapavoid) badgesHtml += `<span class="badge badge-trait">❖ TrapAvoid</span>`;
-  if (c.lays_eggs) badgesHtml += `<span class="badge badge-trait">❖ Eggs</span>`;
-  if (c.is_mount) badgesHtml += `<span class="badge badge-trait">❖ Mount</span>`;
-  
-  return badgesHtml;
-}
-
 // Renderer function
 function renderCreatures(list) {
   cardsContainer.innerHTML = '';
@@ -1234,10 +1062,27 @@ function renderCreatures(list) {
     const card = document.createElement('div');
     const size = getAdultSize(c.body_sizes);
     let natureClasses = ['card'];
-    
-    const classification = getCreatureClassification(c);
-    
-    natureClasses.push(classification.class);
+    if (c.is_megabeast || c.is_semimegabeast || size >= 5000000) {
+      natureClasses.push('nature-megabeast');
+    }
+    if (c.is_sentient) {
+      natureClasses.push('nature-sentient');
+    }
+    if (c.is_flier) {
+      natureClasses.push('nature-flyer');
+    }
+    if (c.is_aquatic || c.is_amphibious) {
+      natureClasses.push('nature-aquatic');
+    }
+    if (c.is_nopain || c.is_nobreathe || c.is_noexert) {
+      natureClasses.push('nature-construct');
+    }
+    if (c.is_domestic || c.is_trainable) {
+      natureClasses.push('nature-domestic');
+    }
+    if (!c.is_sentient && !c.is_megabeast && !c.is_flier && !c.is_aquatic && !c.is_nopain) {
+      natureClasses.push('nature-wild');
+    }
     card.className = natureClasses.join(' ');
     card.style.animationDelay = `${Math.min(20, index) * 0.03}s`;
     
@@ -1246,7 +1091,36 @@ function renderCreatures(list) {
     
     card.addEventListener('click', () => openCreatureDetailDrawer(c));
     
-    const badgesHtml = getCreatureBadgesHtml(c);
+    let badgesHtml = '';
+    if (c.included_in_mod) {
+      badgesHtml += `<span class="badge badge-included">Included</span>`;
+    } else {
+      badgesHtml += `<span class="badge badge-excluded">Excluded</span>`;
+    }
+    
+    if (c.is_aquatic && !c.is_amphibious) {
+      badgesHtml += `<span class="badge badge-type badge-aquatic">Aquatic</span>`;
+    } else if (c.is_amphibious) {
+      badgesHtml += `<span class="badge badge-type badge-amphibious">Amphibious</span>`;
+    } else if (c.is_prehistoric || c.creature_classes.includes('REAL_WORLD_EXTINCT')) {
+      badgesHtml += `<span class="badge badge-type badge-prehistoric">Prehistoric</span>`;
+    } else if (c.source_file.includes('subterranean') || c.biomes.some(b => b.includes('SUBTERRANEAN'))) {
+      badgesHtml += `<span class="badge badge-type badge-cavern">Cavern</span>`;
+    }
+
+    if (c.is_good) badgesHtml += `<span class="badge badge-type badge-good">Good</span>`;
+    if (c.is_evil) badgesHtml += `<span class="badge badge-type badge-evil">Evil</span>`;
+    if (c.is_savage) badgesHtml += `<span class="badge badge-type badge-savage">Savage</span>`;
+    if (c.is_flier) badgesHtml += `<span class="badge badge-type badge-flier">Flyer</span>`;
+    if (c.is_sentient) badgesHtml += `<span class="badge badge-type badge-sentient">Sentient</span>`;
+
+    if (c.is_webber) badgesHtml += `<span class="badge badge-trait">❖ Web</span>`;
+    if (c.is_nopain) badgesHtml += `<span class="badge badge-trait">❖ Painless</span>`;
+    if (c.is_noexert) badgesHtml += `<span class="badge badge-trait">❖ Tireless</span>`;
+    if (c.is_nobreathe) badgesHtml += `<span class="badge badge-trait">❖ Airless</span>`;
+    if (c.is_trapavoid) badgesHtml += `<span class="badge badge-trait">❖ TrapAvoid</span>`;
+    if (c.lays_eggs) badgesHtml += `<span class="badge badge-trait">❖ Eggs</span>`;
+    if (c.is_mount) badgesHtml += `<span class="badge badge-trait">❖ Mount</span>`;
     
     const sizeLabel = formatBodySize(size).split(' — ')[0];
 

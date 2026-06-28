@@ -1,8 +1,0 @@
-entity_ultimate_embark
-
-[OBJECT:ENTITY]
-
-[SELECT_ENTITY:MOUNTAIN]
-    [USE_GOOD_ANIMALS]
-    [USE_EVIL_ANIMALS]
-    [USE_CAVE_ANIMALS]
