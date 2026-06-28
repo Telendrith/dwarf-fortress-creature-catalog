@@ -53,7 +53,9 @@ To eliminate list clutter on the embark screen, creatures are organized into thr
 3. **Prehistoric Giants:** Extinct species, starting from small ancient life (Dodos) up to massive beasts (T-Rex, Brachiosaurus, Mosasaurus).
 
 > [!TIP]
-> **Increase Embark Points in Worldgen:** Because large, powerful creatures are expensive, it is highly recommended to increase your default starting embark points in your worldgen settings if you plan to buy premium beasts!
+> **Increase Embark Points in Worldgen:** Because large, powerful creatures are expensive, I ***seriously*** recommend increasing your default starting embark points in your worldgen settings if you plan to buy creatures that are expensive. Some creatures are very valuable and cost lots of embark points!
+> 
+> ![Dwarf Fortress Starting Embark Points Setting](screenshots/embarkpoints.jpg)
 
 ---
 

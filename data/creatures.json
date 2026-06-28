@@ -50979,7 +50979,7 @@
       "is_megabeast": false,
       "is_semimegabeast": false,
       "included_in_mod": false,
-      "exclusion_reason": "TAG_EXCLUSION: creature has [INTELLIGENT]",
+      "exclusion_reason": "TAG_EXCLUSION: creature has [SMALL_REMAINS]",
       "resolved_attacks": [
         {
           "name": "PUNCH",
@@ -120495,7 +120495,7 @@
       "is_megabeast": false,
       "is_semimegabeast": false,
       "included_in_mod": false,
-      "exclusion_reason": "TAG_EXCLUSION: creature has [INTELLIGENT]",
+      "exclusion_reason": "TAG_EXCLUSION: creature has [SMALL_REMAINS]",
       "resolved_attacks": [
         {
           "name": "PUNCH",
