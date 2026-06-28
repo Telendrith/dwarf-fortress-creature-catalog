@@ -44152,7 +44152,7 @@
       "is_megabeast": false,
       "is_semimegabeast": true,
       "included_in_mod": false,
-      "exclusion_reason": "TAG_EXCLUSION: creature has [SEMIMEGABEAST]",
+      "exclusion_reason": "TAG_EXCLUSION: creature has [CAN_LEARN]",
       "resolved_attacks": [
         {
           "name": "PUNCH",
@@ -50781,7 +50781,7 @@
       "is_megabeast": false,
       "is_semimegabeast": true,
       "included_in_mod": false,
-      "exclusion_reason": "TAG_EXCLUSION: creature has [SEMIMEGABEAST]",
+      "exclusion_reason": "TAG_EXCLUSION: creature has [CAN_LEARN]",
       "resolved_attacks": [
         {
           "name": "PUNCH",
@@ -60128,7 +60128,7 @@
       "is_megabeast": false,
       "is_semimegabeast": true,
       "included_in_mod": false,
-      "exclusion_reason": "TAG_EXCLUSION: creature has [SEMIMEGABEAST]",
+      "exclusion_reason": "TAG_EXCLUSION: creature has [CAN_LEARN]",
       "resolved_attacks": [
         {
           "name": "PUNCH",
@@ -110062,7 +110062,7 @@
       "is_megabeast": false,
       "is_semimegabeast": true,
       "included_in_mod": false,
-      "exclusion_reason": "TAG_EXCLUSION: creature has [SEMIMEGABEAST]",
+      "exclusion_reason": "TAG_EXCLUSION: creature has [CAN_LEARN]",
       "resolved_attacks": [
         {
           "name": "PUNCH",
