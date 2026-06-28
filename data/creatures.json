@@ -15133,7 +15133,7 @@
       "is_megabeast": false,
       "is_semimegabeast": false,
       "included_in_mod": false,
-      "exclusion_reason": "TAG_EXCLUSION: creature has [CAN_SPEAK]",
+      "exclusion_reason": "TAG_EXCLUSION: creature has [CAN_LEARN]",
       "resolved_attacks": [
         {
           "name": "PUNCH",
@@ -50979,7 +50979,7 @@
       "is_megabeast": false,
       "is_semimegabeast": false,
       "included_in_mod": false,
-      "exclusion_reason": "TAG_EXCLUSION: creature has [SMALL_REMAINS]",
+      "exclusion_reason": "TAG_EXCLUSION: creature has [INTELLIGENT]",
       "resolved_attacks": [
         {
           "name": "PUNCH",
@@ -88712,7 +88712,7 @@
       "is_megabeast": false,
       "is_semimegabeast": false,
       "included_in_mod": false,
-      "exclusion_reason": "TAG_EXCLUSION: creature has [CAN_SPEAK]",
+      "exclusion_reason": "TAG_EXCLUSION: creature has [CAN_LEARN]",
       "resolved_attacks": [
         {
           "name": "BITE",
@@ -91634,7 +91634,7 @@
       "is_megabeast": false,
       "is_semimegabeast": false,
       "included_in_mod": false,
-      "exclusion_reason": "TAG_EXCLUSION: creature has [CAN_SPEAK]",
+      "exclusion_reason": "TAG_EXCLUSION: creature has [CAN_LEARN]",
       "resolved_attacks": [
         {
           "name": "SCRATCH",
@@ -109561,7 +109561,7 @@
       "is_megabeast": false,
       "is_semimegabeast": false,
       "included_in_mod": false,
-      "exclusion_reason": "TAG_EXCLUSION: creature has [CAN_SPEAK]",
+      "exclusion_reason": "TAG_EXCLUSION: creature has [CAN_LEARN]",
       "resolved_attacks": [
         {
           "name": "PUNCH",
@@ -120495,7 +120495,7 @@
       "is_megabeast": false,
       "is_semimegabeast": false,
       "included_in_mod": false,
-      "exclusion_reason": "TAG_EXCLUSION: creature has [SMALL_REMAINS]",
+      "exclusion_reason": "TAG_EXCLUSION: creature has [INTELLIGENT]",
       "resolved_attacks": [
         {
           "name": "PUNCH",
@@ -125910,7 +125910,7 @@
       "is_megabeast": false,
       "is_semimegabeast": false,
       "included_in_mod": false,
-      "exclusion_reason": "TAG_EXCLUSION: creature has [CAN_SPEAK]",
+      "exclusion_reason": "TAG_EXCLUSION: creature has [CAN_LEARN]",
       "resolved_attacks": [
         {
           "name": "PUNCH",
@@ -126610,7 +126610,7 @@
       "is_megabeast": false,
       "is_semimegabeast": false,
       "included_in_mod": false,
-      "exclusion_reason": "TAG_EXCLUSION: creature has [CAN_SPEAK]",
+      "exclusion_reason": "TAG_EXCLUSION: creature has [CAN_LEARN]",
       "resolved_attacks": [
         {
           "name": "PUNCH",

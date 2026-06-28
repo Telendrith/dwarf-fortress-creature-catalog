@@ -24,13 +24,13 @@ We host an interactive, searchable **DF Pokedex** companion website. It acts as 
 ---
 
 ## 📸 Screenshots
-Here is a preview of the **Dwarf Fortress Creature Catalog (DF Pokedex)** companion web app:
+Here is a preview of the **Dwarf Fortress Creature Catalog (DF Pokedex)** companion web app, showing the main catalog search and various examples of detailed creature entries in our bestiary:
 
-| Main Interface | Advanced Search & Filters |
+| Catalog Homepage | Diverse Creature Details (Example 1) |
 |---|---|
-| ![Dwarf Fortress Creature Catalog Home](screenshots/catalog_home.png) | ![Advanced Filters and Combat Metrics](screenshots/catalog_filters.png) |
-| **Creature Details Drawer** | **Tactical Combat Assessments** |
-| ![Detailed anatomy and raw plans](screenshots/catalog_detail.png) | ![Natural weapon profiles and skill metrics](screenshots/catalog_combat.png) |
+| ![Dwarf Fortress Creature Catalog Home](screenshots/catalog_home.png) | ![Creature Catalog Entry Dinosaur Example](screenshots/catalog_detail_1.png) |
+| **Diverse Creature Details (Example 2)** | **Diverse Creature Details (Example 3)** |
+| ![Creature Catalog Entry Mammal Example](screenshots/catalog_detail_2.png) | ![Creature Catalog Entry Cavern Example](screenshots/catalog_detail_3.png) |
 
 ---
 
