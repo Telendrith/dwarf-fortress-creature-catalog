@@ -2,6 +2,13 @@
 
 All notable changes to the "Ultimate Embark Animals" mod will be documented in this file.
 
+## [0.5] - 2026-06-27
+### Added
+- **Pokedex Sentience Fix:** Fixed a database compiler bug that miscalculated intelligence flags for animal people. They are now correctly parsed and listed as sentient.
+- **Card Classification Fix:** Corrected Web UI classification logic to ensure trainable excluded wild beasts (like dinosaurs or aquatic predators) are not incorrectly labeled as "Domestic".
+- **Enhanced Repository Documentation:** Redesigned the main README with GitHub status badges, screenshots gallery, and link integrations.
+- **Mod Page Links Integration:** Updated the Steam description template to directly link to the GitHub project source and the live Creature Catalog website.
+
 ## [0.4] - 2026-06-27
 ### Added
 - **Categorized and Value-Sorted Embark Screen Layout:** Reordered animal overrides inside raw files. Animals are now grouped into three distinct categories (Mundane wild fauna first, Cavern beasts second, and Prehistoric beasts third) and sorted in ascending order of their Pet Value within each group, resolving embark scroll usability issues.

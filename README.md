@@ -1,19 +1,36 @@
 # Ultimate Embark Animals: All Native Creatures Embark
 
 [![Game Version](https://img.shields.io/badge/Dwarf%20Fortress-v53.15-blue.svg)](https://www.dwarffortressgame.com/)
-[![Mod Version](https://img.shields.io/badge/Mod%20Version-v0.4-green.svg)](https://steamcommunity.com/sharedfiles/filedetails/?id=3751705029)
+[![Mod Version](https://img.shields.io/badge/Mod%20Version-v0.5-green.svg)](https://steamcommunity.com/sharedfiles/filedetails/?id=3751705029)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![GitHub Pages](https://img.shields.io/badge/DF%20Pokedex-Live-brightgreen.svg)](https://telendrith.github.io/dwarf-fortress-creature-catalog/)
 
 The base game of Dwarf Fortress restricts the starting embark screen to a small handful of standard domestic animals (dogs, cats, pigs, sheep, etc.). 
 
-**Ultimate Embark Animals** is a lightweight, raw-compliant mod that dynamically opens up the embark screen to **399 native wild, cavern, and prehistoric creatures**! Start your fortress with a giant panda, a woolly mammoth, a cave crocodile, or a troop of macaques right from day one.
+**Ultimate Embark Animals** compiles the vanilla creature raw files and appends the `[COMMON_DOMESTIC]`, `[TRAINABLE]`, and `[PET]` tags to **399 vanilla native creatures**, allowing you to start your fortress with a giant panda, a woolly mammoth, a cave crocodile, or a troop of macaques right from day one!
 
 ---
 
-## 🔗 Key Links
+## 🔗 Key Links & Interactive Pokedex
 * 🎮 **Steam Workshop Page:** [Ultimate Embark Animals on Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=3751705029)
 * 📖 **DF Pokedex Companion Bestiary:** [Dwarf Fortress Creature Catalog Website](https://telendrith.github.io/dwarf-fortress-creature-catalog/)
+
+We host an interactive, searchable **DF Pokedex** companion website. It acts as an invaluable guide for both playing and mod planning:
+* **Complete Searchable Catalog:** Search all 967 parsed vanilla creatures by name, ID, or custom attributes.
+* **Triage Lists:** Filter included creatures (embark-ready) vs. excluded/cut creatures (with detailed reasons why they were filtered out).
+* **Husbandry Reference:** Compare body weights (with percentiles), land speeds (gait delays), max age, biomes, and egg-laying metrics.
+* **Combat Assessment:** View natural weapon strike speeds, contact areas, and damage forms for training war animals.
+
+---
+
+## 📸 Screenshots
+Here is a preview of the **Dwarf Fortress Creature Catalog (DF Pokedex)** companion web app:
+
+| Main Interface | Advanced Search & Filters |
+|---|---|
+| ![Dwarf Fortress Creature Catalog Home](screenshots/catalog_home.png) | ![Advanced Filters and Combat Metrics](screenshots/catalog_filters.png) |
+| **Creature Details Drawer** | **Tactical Combat Assessments** |
+| ![Detailed anatomy and raw plans](screenshots/catalog_detail.png) | ![Natural weapon profiles and skill metrics](screenshots/catalog_combat.png) |
 
 ---
 
