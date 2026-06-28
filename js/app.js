@@ -1154,7 +1154,7 @@ function getCreatureClassification(c) {
   if (c.is_flier) {
     return { class: 'nature-flyer', label: 'Flyer' };
   }
-  if (c.is_domestic || c.is_trainable) {
+  if (c.is_domestic || (c.included_in_mod && !c.is_sentient)) {
     return { class: 'nature-domestic', label: 'Domestic' };
   }
   return { class: 'nature-wild', label: 'Wild' };
