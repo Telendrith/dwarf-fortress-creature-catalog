@@ -28,9 +28,9 @@ Here is a preview of the **Dwarf Fortress Creature Catalog (DF Pokedex)** compan
 
 | Main Interface | Advanced Search & Filters |
 |---|---|
-| ![Dwarf Fortress Creature Catalog Home](screenshots/catalog_home.png) | ![Advanced Filters and Combat Metrics](screenshots/catalog_filters.png) |
+| ![Dwarf Fortress Creature Catalog Home](screenshots/catalog_home.png) | ![Creature Details Drawer](screenshots/catalog_filters.png) |
 | **Creature Details Drawer** | **Tactical Combat Assessments** |
-| ![Detailed anatomy and raw plans](screenshots/catalog_detail.png) | ![Natural weapon profiles and skill metrics](screenshots/catalog_combat.png) |
+| ![Creature Details Drawer](screenshots/catalog_detail.png) | ![Creature Details Drawer](screenshots/catalog_combat.png) |
 
 ---
 
